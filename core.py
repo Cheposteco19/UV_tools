@@ -6,7 +6,7 @@ def auto_unwrap(*args):
     for item in selected_items:
         cmds.polyAutoProjection(item)
 
-def camara_based(*args):
+def camera_based(*args):
     selected_items = cmds.ls(selection=True)
     for item in selected_items:
         cmds.polyProjection(item,type='Planar', mapDirection='p', constructionHistory=True)
@@ -23,7 +23,7 @@ def auto_layout(*args):
     selected_items=cmds.ls(selection=True)
     cmds.u3dLayout(selected_items)
 
-def set_tilable_size(density,map_size):
+def set_tileable_size(density,map_size):
     mm.eval("texSetTexelDensity {} {};".format(density,map_size))
     mm.eval("texOrientShells;")
     mm.eval("texUnstackShells 1;")
