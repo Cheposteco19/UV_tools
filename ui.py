@@ -16,7 +16,7 @@ def show_ui():
     if cmds.window(WINDOW_NAME,query=True,exists=True):
         cmds.deleteUI(WINDOW_NAME)
 
-    cmds.window(WINDOW_NAME, title='UV Tools', widthHeight=(250,175))
+    cmds.window(WINDOW_NAME, title='UV Tools', widthHeight=(250,185))
 
     cmds.columnLayout(adjustableColumn=True)
     cmds.rowLayout(numberOfColumns=2)
@@ -44,5 +44,11 @@ def show_ui():
     cmds.columnLayout(adjustableColumn=True)
     cmds.button(TILEABLE_2M_BUTTON_NAME, label='Tileable 2M\n(10.24|2048)')
     cmds.button(TILEABLE_CUSTOM_BUTTON_NAME, label='Custom\nTexel\nDensity',height=80)
+    cmds.setParent('..')
+    cmds.setParent('..')
+    cmds.setParent('..')
+    cmds.setParent('..')
+
+    cmds.text(label='GD67_JoseMunguia   ', align='right')
 
     cmds.showWindow()
