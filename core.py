@@ -8,8 +8,14 @@ def auto_unwrap(*args):
 
 def camera_based(*args):
     selected_items = cmds.ls(selection=True)
+    new_selection=[]
     for item in selected_items:
-        cmds.polyProjection(item,type='Planar', mapDirection='p', constructionHistory=True)
+        object=item.split('.')[0]
+        face_index=cmds.polyEvaluate(item,face=True)-1
+        new_selection.append('{}.f[0:{}]'.format(object,face_index))
+    print(new_selection)
+    cmds.select(new_selection,replace=True)
+    cmds.polyProjection(type='Planar', mapDirection='p', constructionHistory=True)
 
 def unfold(*args):
     selected_items=cmds.ls(selection=True)
