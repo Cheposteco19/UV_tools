@@ -68,6 +68,6 @@ def set_tileable_size(density,map_size):
     cmds.DeleteHistory()
     cmds.FreezeTransformations()
 
-    cmds.selectMode(edge=True)
+    cmds.selectMode(component=True)
     cmds.hilite(objects)
     #cmds.select(final_selection, replace=True)
