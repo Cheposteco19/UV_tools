@@ -75,7 +75,7 @@ def set_tileable_size(density,map_size):
 
     uv_maps = []
     objects=get_objects(selected_items)
-    faces=[]
+    edges=[]
     edge_index={}
 
     #Populate map list and edge directory
@@ -108,7 +108,7 @@ def set_tileable_size(density,map_size):
     for object in edge_index:
         for edge in range(edge_index[object]):
             name='{}.e[{}]'.format(object,edge)
-            faces.append(name)
+            edges.append(name)
 
     #Clean select edges
-    clean_selection(objects,faces)
+    clean_selection(objects,edges)
