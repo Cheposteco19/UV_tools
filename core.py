@@ -71,6 +71,13 @@ def set_cut_sew_tool(*args):
 
 def set_tileable_size(density,map_size):
 
+    # Kill history and freeze numbers
+    cmds.DeleteHistory()
+    cmds.FreezeTransformations()
+
+    #Unwrap
+    auto_unwrap()
+
     selected_items = cmds.ls(selection=True)
 
     uv_maps = []
@@ -108,7 +115,12 @@ def set_tileable_size(density,map_size):
     for object in edge_index:
         for edge in range(edge_index[object]):
             name='{}.e[{}]'.format(object,edge)
+
             edges.append(name)
+
+    # Kill history and freeze numbers
+    cmds.DeleteHistory()
+    cmds.FreezeTransformations()
 
     #Clean select edges
     clean_selection(objects,edges)
