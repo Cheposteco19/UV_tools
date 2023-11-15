@@ -129,3 +129,14 @@ def set_tileable_size(density,map_size):
 
     #Clean select edges
     clean_selection(objects,edges)
+
+
+def reset_move_tool(*args):
+    cmds.resetTool('Move')
+
+
+def preserve_uvs(*args):
+    mm.eval('setTRSPreserveUVs true;')
+
+def dont_preserve_uvs(*args):
+    mm.eval('setTRSPreserveUVs false;')
