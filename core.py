@@ -54,7 +54,12 @@ def camera_based(*args):
 
 def unfold(*args):
 
-    selected_items=cmds.ls(selection=True)
+    #Set the select tool
+    cmds.SelectTool()
+
+    #Get object from past selection
+    cmds.selectMode(object=True)
+    selected_items = cmds.ls(selection=True)
 
     #Unfold
     for item in selected_items:
