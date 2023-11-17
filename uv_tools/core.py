@@ -54,7 +54,12 @@ def camera_based(*args):
 
 def unfold(*args):
 
-    selected_items=cmds.ls(selection=True)
+    #Set the select tool
+    cmds.SelectTool()
+
+    #Get object from past selection
+    cmds.selectMode(object=True)
+    selected_items = cmds.ls(selection=True)
 
     #Unfold
     for item in selected_items:
@@ -71,11 +76,18 @@ def set_cut_sew_tool(*args):
 
 def set_tileable_size(density,map_size):
 
+    # Kill history and freeze numbers
+    cmds.DeleteHistory()
+    cmds.FreezeTransformations()
+
+    #Unwrap
+    auto_unwrap()
+
     selected_items = cmds.ls(selection=True)
 
     uv_maps = []
     objects=get_objects(selected_items)
-    faces=[]
+    edges=[]
     edge_index={}
 
     #Populate map list and edge directory
@@ -108,7 +120,23 @@ def set_tileable_size(density,map_size):
     for object in edge_index:
         for edge in range(edge_index[object]):
             name='{}.e[{}]'.format(object,edge)
-            faces.append(name)
+
+            edges.append(name)
+
+    # Kill history and freeze numbers
+    cmds.DeleteHistory()
+    cmds.FreezeTransformations()
 
     #Clean select edges
-    clean_selection(objects,faces)
+    clean_selection(objects,edges)
+
+
+def reset_move_tool(*args):
+    cmds.resetTool('Move')
+
+
+def preserve_uvs(*args):
+    mm.eval('setTRSPreserveUVs true;')
+
+def dont_preserve_uvs(*args):
+    mm.eval('setTRSPreserveUVs false;')
