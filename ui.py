@@ -9,8 +9,8 @@ AUTO_UNWRAP_BUTTON_NAME='auto_unwrap_button'
 TILEABLE_1M_BUTTON_NAME='tileable_1m_button'
 TILEABLE_2M_BUTTON_NAME='tileable_2m_button'
 TILEABLE_CUSTOM_BUTTON_NAME='tileable_custom_button'
-CUSTOM_DENSITY_TEXTBOX_NAME='custom_density_textbox'
-CUSTOM_MAP_SIZE_TEXTBOX_NAME='custom_map_size_textbox'
+CUSTOM_DENSITY_FLOATBOX_NAME= 'custom_density_textbox'
+CUSTOM_MAP_SIZE_INTBOX_NAME= 'custom_map_size_textbox'
 RESET_MOVE_TOOL_BUTTON_NAME='reset_move_tool_button'
 PRESERVE_UVS_CHECKBOX_NAME='preserve_UVs_checkbox'
 
@@ -41,9 +41,9 @@ def show_ui():
     cmds.columnLayout(adjustableColumn=True)
     cmds.button(TILEABLE_1M_BUTTON_NAME, label='Tileable 1M\n(10.24|1024)',command=texel_density_1m)
     cmds.text(label='Texel density\n(px/inch)')
-    cmds.textField(CUSTOM_DENSITY_TEXTBOX_NAME,width=10,text='10.24')
+    cmds.floatField(CUSTOM_DENSITY_FLOATBOX_NAME, width=10, value=10.24, precision=2)
     cmds.text(label='Map size')
-    cmds.textField(CUSTOM_MAP_SIZE_TEXTBOX_NAME,width=10,text='4096')
+    cmds.intField(CUSTOM_MAP_SIZE_INTBOX_NAME, width=10, value=4096)
     cmds.setParent('..')
 
     #Density second column
@@ -76,6 +76,6 @@ def texel_density_2m(*args):
     uv_tools_core.set_tileable_size(10.24, 2048)
 
 def texel_density_custom(*args):
-    density=cmds.textField(CUSTOM_DENSITY_TEXTBOX_NAME,query=True,text=True)
-    map_size=cmds.textField(CUSTOM_MAP_SIZE_TEXTBOX_NAME,query=True,text=True)
+    density=cmds.floatField(CUSTOM_DENSITY_FLOATBOX_NAME, query=True, value=True)
+    map_size=cmds.intField(CUSTOM_MAP_SIZE_INTBOX_NAME, query=True, value=True)
     uv_tools_core.set_tileable_size(density, map_size)
