@@ -75,3 +75,6 @@ def texel_density_custom(*args):
     density=cmds.floatField(CUSTOM_DENSITY_FLOATBOX_NAME, query=True, value=True)
     map_size=cmds.intField(CUSTOM_MAP_SIZE_INTBOX_NAME, query=True, value=True)
     uv_tools_core.set_tileable_size(density, map_size)
+
+def uncheck_preserve_uvs():
+    cmds.checkBox(PRESERVE_UVS_CHECKBOX_NAME,edit=True,value=False)
