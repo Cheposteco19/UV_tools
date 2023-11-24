@@ -35,6 +35,11 @@ def auto_unwrap(*args):
 
 def camera_based(*args):
 
+    # Set the select tool
+    cmds.SelectTool()
+
+    # Get object from past selection
+    cmds.selectMode(object=True)
     selected_items = cmds.ls(selection=True)
 
     faces=[]
@@ -62,15 +67,28 @@ def unfold(*args):
     cmds.selectMode(object=True)
     selected_items = cmds.ls(selection=True)
 
+    uv_maps = []
+    objects = get_objects(selected_items)
+
+    for item in objects:
+        map_index = cmds.polyEvaluate(item, uvcoord=True) - 1
+        uv_maps.append('{}.map[0:{}]'.format(item, map_index))
+
     #Unfold
     for item in selected_items:
-        cmds.u3dUnfold(item,ite=True,p=False,bi=True,tf=True,ms=1024,rs=False)
+        cmds.unfold(item,i=5000, ss=0.001, gb=0, gmb=0.5, pub=0, ps=0, oa=0, us=1, s=0.02)
 
     #Orient Shells
     mm.eval("texOrientShells;")
 
     #Layout
-    cmds.u3dLayout(selected_items)
+    cmds.polyMultiLayoutUV(lm=1,sc=1,rbf=1,fr=1,ps=0.2,l=2,gu=1,gv=1,psc=0,su=1,sv=1,ou=0,ov=0)
+
+    # Set the user to UVmode
+    cmds.selectMode(component=True)
+    cmds.selectType(polymeshUV=True)
+
+    clean_selection(objects,uv_maps)
 
 def set_cut_sew_tool(*args):
     cmds.SetCutSewUVTool()
@@ -80,9 +98,6 @@ def set_tileable_size(density,map_size):
     # Kill history and freeze numbers
     cmds.DeleteHistory()
     cmds.FreezeTransformations()
-
-    #Unwrap
-    auto_unwrap()
 
     selected_items = cmds.ls(selection=True)
 
