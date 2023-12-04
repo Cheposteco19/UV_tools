@@ -30,7 +30,7 @@ def show_ui():
     cmds.text(label='BAKED',font='boldLabelFont')
     cmds.button(CAMERA_BASED_BUTTON_NAME, label='Camera-based', command=uv_tools_core.camera_based)
     cmds.button(CUT_SEW_BUTTON_NAME, label='Cut/Sew\nTool', height=38, command=uv_tools_core.set_cut_sew_tool)
-    cmds.button(UNFOLD_BUTTON_NAME, label='Unfold', height=47, command=uv_tools_core.unfold,annotation='Unfolds/orient shells/layout')
+    cmds.button(UNFOLD_BUTTON_NAME, label='Unfold', height=47, command=uv_tools_core.unfold,annotation='unfold/orient shells/layout/uv selection')
     cmds.text(label='',height=47)
     cmds.setParent('..')
 
@@ -48,7 +48,7 @@ def show_ui():
     cmds.floatField(CUSTOM_DENSITY_FLOATBOX_NAME, value=10.24, precision=2)
 
 
-    cmds.button(RESET_MOVE_TOOL_BUTTON_NAME, label='Reset Tools', command=uv_tools_core.reset_tools, width=10,annotation='Reset Move/Rotate/Scale tools')
+    cmds.button(RESET_MOVE_TOOL_BUTTON_NAME, label='Reset Tools', command=uv_tools_core.reset_tools, width=10,annotation='reset move/rotate/scale tools')
     cmds.setParent('..')
 
     #Density second column
